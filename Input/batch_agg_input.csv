@@ -1,0 +1,8 @@
+measurement_type,value,timestamp
+temperature,88,2022-06-04T12:01:00.000+00:00
+temperature,89,2022-06-04T12:01:30.000+00:00
+temperature,69,2022-06-04T12:01:30.000+00:00
+precipitation,0.5,2022-06-04T14:23:32.000+00:00
+precipitation,0.9,2022-06-05T14:23:32.000+00:00
+temperature,89,2022-06-05T14:23:32.000+00:00
+Temperature,74,2022-06-05T14:20:32.000+00:00
