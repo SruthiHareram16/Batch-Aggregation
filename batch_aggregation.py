@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, avg, min, max, round, upper
+from pyspark.sql.functions import col, avg, min, max, round, upper, to_date
 import shutil
-
+import os
+import glob
 
 # Create a Spark session
 spark = SparkSession.builder \
@@ -11,7 +12,8 @@ spark = SparkSession.builder \
 df = spark.read.csv("./Input/batch_agg_input.csv", header=True, inferSchema=True)
 
 #Formating
-df = df.withColumn("measurement_type",upper(col("measurement_type"))).withColumn("date", to_date(col("timestamp")))
+df = df.withColumn("measurement_type",upper(col("measurement_type")))\
+    .withColumn("date", to_date(col("timestamp")))
 #df.show()
 
 # Aggregating at day level
@@ -24,7 +26,7 @@ aggregated_df = df.groupBy(
     max("value").alias("Max value for the Day")
 ).orderBy(col("date"),col("measurement_type"))
 
-# result dataframe
+
 #aggregated_df.show()
 
 # writing to csv
@@ -40,6 +42,7 @@ for filename in os.listdir("./Output"):
 
         # Move (rename) the file
         shutil.move(old_file_path, new_file_path)
+
 
 # Stop the Spark session
 spark.stop()
